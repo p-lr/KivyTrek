@@ -1,0 +1,41 @@
+ShowcaseScreen:
+	name: 'compass'
+
+    Scatter:
+        id: sc
+        do_rotation: False
+        do_scale: False
+        do_translation_x: False
+        do_translation_y: False
+        Image:
+            size: self.texture_size
+            source: 'data/gold.png'
+            center: sc.center
+
+        Image:
+            size: self.texture_size
+            source: 'data/compass.png'
+            center: sc.center
+            canvas.before:
+                PushMatrix
+                Rotate:
+                    angle: app.compass_module.azimuth
+                    axis: 0, 0, 1
+                    origin: self.center
+
+		    canvas.after:
+			    PopMatrix
+        Image:
+            size: self.texture_size
+            source: 'data/reticule-compass.png'
+            center: sc.center
+
+    BoxLayout:
+        size_hint_y: None
+        height: '48dp'
+        padding: '4dp'
+
+        ToggleButton:
+            id: toggle_button
+            text: app.compass_module.compass_status
+            on_press: app.compass_module.toggle_state()

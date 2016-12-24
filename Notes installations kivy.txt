@@ -1,0 +1,38 @@
+• Dépendances - A installer
+
+  - kivy est installé au moyen du ppa
+  - buildozer et cython au moyen de pip
+  - gpspy : télécharger la dernière version depuis le dép GitHub, ou bien utiliser la version stockée en conf
+            dans libs/gpxpy-master.zip
+            Installer avec python setup.py install
+    NB : Il faut installer virtualenv avec : sudo apt-get install python-virtualenv
+         C'est nécessaire pour buildozer.
+  
+
+  Il faut avoir python 2.7 ou supérieur (mais 3.x pas encore fiabilisé).
+  Côté python, installer pip si pas déjà présent.
+  Pour ubuntu, installer le package python-dev : sudo apt install python-dev
+
+  NB : buildozer inclut pyjnius et plyer
+
+• Installation
+
+  Pour kivy : sudo apt update
+              sudo apt-get install python-kivy
+  Pour cython (idem pour buildozer) : sudo pip install cython==0.21.2
+
+  NB : pour supprimer une version antérieure : sudo pip unistall nom_module
+
+• Mise à jour
+
+  En cas de montée en version de kivy et/ou buildozer, il faut savoir que lancer buildozer crée ~/.buildozer
+  s'il n'éxiste pas, et utilise son contenu sinon. Donc en cas de maj, le contenu de ~/.buildozer est obsolète.
+  Il faut alors supprimer le dossier.
+  Supprimer également le dossier .buildozer qui se trouve dans le répertoire du projet.
+
+• Soucis possibles avec buildozer
+
+  Plantage à la fin de "buildozer -v android debug", il n'y a pas d'outil de build, ant ou autre...
+  Voir http://stackoverflow.com/questions/26277154/android-compile-error-using-buildozer
+  C'est bien expliqué.
+

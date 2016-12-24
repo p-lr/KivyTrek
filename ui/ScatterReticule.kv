@@ -1,0 +1,20 @@
+#: import Scatter kivy.uix.scatter
+#: import Image kivy.uix.image
+
+Scatter:
+    pos: (400,400)
+    size: (101, 101)
+    do_rotation: False
+    do_scale: False
+    #canvas.after:
+    #    Color:
+    #        rgba: 0.1, 0.5 , 0.5, 0.5
+    #    Rectangle:
+    #        pos: self.pos
+    #        size: root.size
+    on_touch_down:
+        if self.collide_point(*args[1].pos): self.parent.getCalibrationCoord(*args[1].pos)
+    Image:
+        source: 'data/reticule_calib.png'
+
+

@@ -1,0 +1,7 @@
+*.pyc
+.idea
+.buildozer
+*.apk
+map
+config.json
+.hg

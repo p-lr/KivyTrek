@@ -1,0 +1,9 @@
+syntax: glob
+*.pyc
+.idea
+.git
+.buildozer
+*.apk
+map
+config.json
+*~

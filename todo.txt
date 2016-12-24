@@ -1,0 +1,19 @@
+• Empêcher la pause automatique du smartphone quand l'app n'est pas utilisée pendant un certain temps (~3min)
+
+  Dans le fichier buildozer.spec, il y a l'option wakelock. Simplement rechercher "wakelock" dans buildozer.spec,
+  lire les explications sur cette option. Au final :
+  1- Décommenter l'option wakelock et assigner la valeur True.
+  2- Ajouter la permission WAKE_LOCK à la liste des permissions (option android.permissions).  
+
+• Dans les options, la liste des réticules affiche 2 fois le réticule sélectionné.
+
+  La liste des réticules devrait être en dehors de options.kv
+  Cette liste serait obtenue au moment de l'instanciation de l'objet CustomSettingItem correspondant aux réticules.
+  Le réticule par défaut serait le premier de la liste.
+  Il n'y aurait plus besoin de définir KivyTrek.DEFAULT_RETICULE
+
+• Optimisation.
+ 
+  Faire en sorte que la mémoire utilisée pour faire une calibration soit libérée une fois la tâche terminée
+  ou quittée. Sinon, la quantité de mémoire utilisée grimpe jusqu'à ce que le gc de python fasse le (gros)
+  ménage. L'application frise temporairement à ce moment là.

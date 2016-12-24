@@ -1,0 +1,100 @@
+#:kivy 1.9.0
+#:import Factory kivy.factory.Factory
+
+<MenuButton@Button+ActionItem>:
+    background_color: .4, 0.4, .4, 0.8
+
+<ActionSpinnerOptions@SpinnerOption>
+    background_color: .4, .4, .4, 0.8
+
+<ActionSpinner@Spinner+ActionItem>
+    canvas.before:
+        Color:
+            rgba: 0.128, 0.128, 0.128, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    border: 27, 20, 12, 12
+    background_normal: 'atlas://data/images/defaulttheme/action_group'
+    option_cls: Factory.ActionSpinnerOptions
+
+<ActionDropdown>:
+    on_size: self.width = '220dp'
+
+<ShowcaseScreen>:
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: root.scroll_y
+        AnchorLayout:
+            size_hint_y: None
+            height: root.height if root.fullscreen else max(root.height, content.minimum_height)
+            GridLayout:
+                id: content
+                cols: 1
+#                spacing: '8dp'
+#                padding: '8dp'
+                size_hint: (1, 1)
+                height: self.minimum_height
+
+BoxLayout:
+    orientation: 'vertical'
+
+    canvas.before:
+        Color:
+            rgb: .61, .61, .61
+        Rectangle:
+            size: self.size
+#            source: 'data/background.png'
+
+    ActionBar:
+        id: actbar
+        ActionView:
+            id: av
+            ActionPrevious:
+                with_previous: False
+                title: 'KivyTrek'
+#                on_release: app.go_higherarchy_previous()
+            ActionGroup:
+                id:actgrp
+                important: True
+                text: "Menu"
+                mode:"spinner"
+                separator_width: 0
+                use_separator: True
+
+                MenuButton:
+                    id: actmap
+                    text: 'Map'
+                    on_release:
+                        # Shows the map screen, and provide the method to load it if necessary
+                        app.show_screen(app.MAP_SCREEN_ID, app.load_map)
+
+                MenuButton:
+                    id: actopt
+                    text: 'Options'
+                    on_release:
+                        app.show_screen(app.OPTIONS_SCREEN_ID, app.load_options)
+                MenuButton:
+                    id: actgps
+                    text: 'GPS info'
+                    on_release:
+                        app.show_screen(app.GPS_SCREEN_ID, app.load_gps_info)
+                MenuButton:
+                    id: actgps
+                    text: 'Compass'
+                    on_release:
+                        app.show_screen(app.COMPASS_SCREEN_ID, app.load_compass)
+                MenuButton:
+                    id: actchoose
+                    text: 'Choose map'
+                    on_release:
+                        app.show_screen(app.MAP_CHOICE_ID, app.show_map_choices)
+
+    ScreenManager:
+        id: sm
+        on_current_screen:
+            #it is possible to change the ActionGroup's text when a screen is being loaded
+            #actgrp.text = args[1].name
+            actgrp._dropdown.select(args[1].name)
+#            idx = app.screen_names.index(args[1].name)
+#            if idx > -1: app.higherarchy.append(idx)

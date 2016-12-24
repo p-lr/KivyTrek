@@ -1,0 +1,40 @@
+ShowcaseScreen:
+	name: 'gps'
+
+    BoxLayout:
+        size_hint_y: None
+        height: '250dp'
+        Label:
+            text: app.gps_module.gps_location
+
+    BoxLayout:
+        size_hint_y: None
+        height: '100dp'
+        Label:
+            text: app.gps_module.gps_status
+
+    BoxLayout:
+        size_hint_y: None
+        height: '48dp'
+        spacing: '15dp'
+
+        Label:
+            text: ''
+        GPXStart:
+            background_normal: 'data/buttons/gpx_record/gpx_start_up.png'
+            background_down: 'data/buttons/gpx_record/gpx_start_down.png'
+            size_hint: None, None
+            size: 156, 156
+        GPXStop:
+            background_normal: 'data/buttons/gpx_record/gpx_stop_up.png'
+            background_down: 'data/buttons/gpx_record/gpx_stop_down.png'
+            size_hint: None, None
+            size: 156, 156
+        GPXStatus:
+            recording_image: 'data/buttons/gpx_record/gpx_recording.png'
+            not_recording_image: 'data/buttons/gpx_record/gpx_not_recording.png'
+            source: self.recording_image if app.gps_module.gps_daemon_recording else self.not_recording_image
+            size_hint: None, None
+            size: 156, 156
+        Label:
+            text: ''

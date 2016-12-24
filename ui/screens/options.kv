@@ -1,0 +1,123 @@
+<ImageButton>:
+    canvas.before:
+        Color:
+            rgba: .61, .61, .61, .5
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    size_hint_y: None
+    height: '45dp'
+
+<DropDownSeparator@Label>:
+    canvas.before:
+        Color:
+            rgba: .61, .61, .61, .5
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    size_hint_y: None
+    height: '5dp'
+
+<ReticuleDropDown>:
+    DropDownSeparator:
+    ImageButton:
+        source: "data/reticule_blue_cross.png"
+        on_release: root.select(self.source)
+    DropDownSeparator:
+    ImageButton:
+        source: "data/reticule.png"
+        on_release: root.select(self.source)
+    DropDownSeparator:
+    ImageButton:
+        source: "data/reticule_red.png"
+        on_release: root.select(self.source)
+    DropDownSeparator:
+
+<CategoryTitle>:
+    size_hint: 1, None
+    height: label_id.texture_size[1] + dp(10)
+    canvas:
+        #Color:
+        #    rgb: .2, .2, .2
+        #Rectangle:
+        #    pos: self.pos
+        #    size: self.width, 1
+        Color:
+            rgb: .5, .5, .5
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    Label:
+        id: label_id
+        pos: root.pos
+        background_color:
+        markup: True
+        text: u'[color=222222][b]\n{0}[/b][/color]'.format(root.title or '')
+        font_size: '15sp'
+        text_size: self.width - 16, None
+
+<CustomSettingItem>:
+    size_hint: .25, None
+    height: labellayout.texture_size[1] + dp(10)
+    content: content
+    canvas:
+        Color:
+            rgb: .2, .2, .2
+        Rectangle:
+            pos: self.x, self.y - 2
+            size: self.width, 1
+
+    BoxLayout:
+        pos: root.pos
+
+        Label:
+            # TODO: have fixed width expressed in dp instead of a fraction of the screen width
+            size_hint_x: .75
+            id: labellayout
+            markup: True
+            text: u'[color=222222]{0}[/color]\n[size=13sp][color=dddddd]{1}[/color][/size]'.format(root.title or '', root.desc or '')
+            font_size: '15sp'
+            text_size: self.width - 32, None
+
+        BoxLayout:
+            id: content
+            size_hint_x: .25
+
+
+ShowcaseScreen:
+	name: 'Sliders'
+	CategoryTitle:
+	    title: 'Map'
+
+	CustomSettingItem:
+	    id: settingitID
+	    title: 'Reticule'
+	    desc: 'Shows the current position'
+	    content: ddbtn.__self__
+	    DropDownButton:
+	        id: ddbtn
+	        source: app.DEFAULT_RETICULE
+
+	CustomSettingItem:
+	    id: set_calib_id
+	    title: 'Show the calibration reticule'
+	    desc: 'Development only, will be removed'
+	    Switch:
+			on_active:
+				app.toggle_calib_ret(self.active)
+
+	CategoryTitle:
+	    title: 'GPS'
+
+	CustomSettingItem:
+	    id: gps_units_id
+	    title: 'Speed units'
+	    desc: 'km/h, mph, or m/s'
+	    content: spinner_id.__self__
+	    Spinner:
+	        id: spinner_id
+	        text: 'km/h'
+	        values: ('km/h', 'mph', 'm/s')
+
+
+
