@@ -30,7 +30,7 @@ oneconf==0.3.7
 PAM==0.4.2
 pdfshuffler==0.6.0
 pexpect==3.3
-Pillow==2.3.0
+Pillow==6.2.0
 piston-mini-client==0.7.5
 plyer==1.2.4
 py==1.4.27
