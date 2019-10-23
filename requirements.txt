@@ -24,7 +24,7 @@ lockfile==0.8
 lxml==3.3.3
 Mako==0.9.1
 MarkupSafe==0.18
-mercurial==2.8.2
+mercurial==4.1.3
 oauthlib==0.6.1
 oneconf==0.3.7
 PAM==0.4.2
